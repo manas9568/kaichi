@@ -12,6 +12,7 @@ reg_model = joblib.load(os.path.join(ML_DIR, "reg_model.pkl"))
 clf_columns = joblib.load(os.path.join(ML_DIR, "clf_columns.pkl"))
 reg_columns = joblib.load(os.path.join(ML_DIR, "reg_columns.pkl"))
 congestion_mapping = joblib.load(os.path.join(ML_DIR, "congestion_mapping.pkl"))
+checkpoint_distances = joblib.load(os.path.join(ML_DIR, "checkpoint_distances.pkl"))
 
 
 def generate_time_label(hour):
@@ -48,4 +49,5 @@ def predict_traffic(data):
         "congestion": congestion_pred,
         "eta_minutes": int(eta),
         "delay_minutes": delay,
+        "distance_km": checkpoint_distances.get(data["checkpoint"], None),
     }
